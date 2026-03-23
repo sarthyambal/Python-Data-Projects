@@ -1,25 +1,26 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
+#define MAX 100
 
-#define  n 100
+int main() {
+    char str[MAX];
+    char stack[MAX];
+    int top = -1;
+    int countA = 0, countB = 0;
 
-int queue[n];
-int front = -1, rear = -1;
+    printf("Enter a String: ");
+    scanf("%s", str);
 
-void display()
-{
-    if (front == -1 && rear == -1)
-    {
-        printf("Queue is empty\n");
-        return;
+    for (int i = 0; str[i]; i++) {
+        stack[++top] = str[i];
     }
 
-    int i = front;
-    printf("Queue elements: ");
-    while (i != rear)
-    {
-        printf("%d ", queue[i]);
-        i = (i + 1) % n;
+    while (top >= 0) {
+        char c = stack[top--];
+        if (c == 'a') countA++;
+        else if (c == 'b') countB++;
     }
-    printf("%d\n", queue[rear]); // print the last element
+
+    printf("'a's: %d, 'b's: %d - They are %sequal\n", countA, countB, (countA == countB) ? "" : "not ");
+    return 0;
 }
